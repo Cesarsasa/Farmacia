@@ -16,7 +16,7 @@ exports.create = (req, res) => {
   };
 
   Proveedor.create(proveedor)
-    .then(data => res.send(data))
+    .then(data => res.status(201).send(data))
     .catch(err => {
       res.status(500).send({
         message: err.message || "Ocurrió un error al crear el proveedor."
@@ -66,7 +66,7 @@ exports.update = (req, res) => {
       if (num == 1) {
         res.send({ message: "Proveedor actualizado correctamente." });
       } else {
-        res.send({ message: `No se pudo actualizar el proveedor con id=${id}.` });
+        res.status(404).send({ message: `No se pudo actualizar el proveedor con id=${id}.` });
       }
     })
     .catch(err => {
@@ -85,7 +85,7 @@ exports.delete = (req, res) => {
       if (num == 1) {
         res.send({ message: "Proveedor eliminado correctamente." });
       } else {
-        res.send({ message: `No se encontró el proveedor con id=${id}.` });
+        res.status(404).send({ message: `No se encontró el proveedor con id=${id}.` });
       }
     })
     .catch(err => {

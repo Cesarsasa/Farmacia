@@ -2,7 +2,7 @@ const db = require("../models");
 const Sucursal = db.sucursales;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new Client
+// Crear una nueva sucursal
 exports.create = (req, res) => {
     if (!req.body.nombre) {
         res.status(400).send({ message: "El nombre no puede estar vacío." });
@@ -16,15 +16,15 @@ exports.create = (req, res) => {
     };
 
     Sucursal.create(sucursal)
-        .then(data => res.send(data))
+        .then(data => res.status(201).send(data))
         .catch(err => {
             res.status(500).send({
-                message: err.message || "Ocurrió un error al crear el sucursal."
+                message: err.message || "Ocurrió un error al crear la sucursal."
             });
         });
 };
 
-// Retrieve all Clients
+// Obtener todas las sucursales
 exports.findAll = (req, res) => {
     const nombre = req.query.nombre;
     const condition = nombre ? { nombre: { [Op.iLike]: `%${nombre}%` } } : null;
@@ -33,71 +33,83 @@ exports.findAll = (req, res) => {
         .then(data => res.send(data))
         .catch(err => {
             res.status(500).send({
-                message: err.message || "Error al recuperar los clientes."
+                message: err.message || "Error al recuperar las sucursales."
             });
         });
 };
 
-// Find one Client by ID
+// Obtener una sucursal por ID
 exports.findOne = (req, res) => {
     const id = req.params.id;
 
     Sucursal.findByPk(id)
-        .then(data => res.send(data))
+        .then(data => {
+            if (data) {
+                res.send(data);
+            } else {
+                res.status(404).send({ 
+                    message: `No se encontró la sucursal con id=${id}.` 
+                });
+            }
+        })
         .catch(err => {
             res.status(500).send({
-                message: "Error al recuperar el cliente con id=" + id
+                message: "Error al recuperar la sucursal con id=" + id
             });
         });
 };
 
-// Update Client by ID
+// Actualizar sucursal por ID
 exports.update = (req, res) => {
     const id = req.params.id;
 
     Sucursal.update(req.body, { where: { id: id } })
         .then(num => {
             if (num == 1) {
-                res.send({ message: "Cliente actualizado correctamente." });
+                res.send({ message: "Sucursal actualizada correctamente." });
             } else {
-                res.send({ message: `No se pudo actualizar el cliente con id=${id}.` });
+                res.status(404).send({ 
+                    message: `No se pudo actualizar la sucursal con id=${id}.` 
+                });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error al actualizar el cliente con id=" + id
+                message: "Error al actualizar la sucursal con id=" + id
             });
         });
 };
 
-// Delete Client by ID
+// Eliminar sucursal por ID
 exports.delete = (req, res) => {
     const id = req.params.id;
 
     Sucursal.destroy({ where: { id: id } })
         .then(num => {
             if (num == 1) {
-                res.send({ message: "Cliente eliminado correctamente." });
+                res.send({ message: "Sucursal eliminada correctamente." });
             } else {
-                res.send({ message: `No se encontró el sucs con id=${id}.` });
+                res.status(404).send({ 
+                    message: `No se encontró la sucursal con id=${id}.` 
+                });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error al eliminar el cliente con id=" + id
+                message: "Error al eliminar la sucursal con id=" + id
             });
         });
 };
 
-// Delete all Clients
+// Eliminar todas las sucursales
 exports.deleteAll = (req, res) => {
     Sucursal.destroy({ where: {}, truncate: false })
         .then(nums => {
-            res.send({ message: `${nums} sucursal fueron eliminados.` });
+            res.send({ message: `${nums} sucursales fueron eliminadas.` });
         })
         .catch(err => {
             res.status(500).send({
-                message: err.message || "Error al eliminar todos lo sucursal."
+                message: err.message || "Error al eliminar todas las sucursales."
             });
         });
 };

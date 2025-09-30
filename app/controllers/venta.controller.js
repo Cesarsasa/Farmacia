@@ -37,16 +37,23 @@ exports.create = async (req, res) => {
       });
     }
 
-    res.status(201).send({ message: "Venta registrada correctamente", ventaId: venta.id });
+    res.status(201).send({ 
+      message: "Venta registrada correctamente", 
+      ventaId: venta.id,
+      total: total
+    });
   } catch (err) {
     res.status(500).send({ message: err.message || "Error al registrar la venta." });
   }
 };
 
-
+// Obtener todas las ventas
 exports.findAll = (req, res) => {
   Venta.findAll({
-    include: ["detalle_venta"], // si tienes la asociación definida
+    include: [{
+      association: "detalle_ventas",
+      include: ["producto"]
+    }],
     order: [["fecha", "DESC"]]
   })
     .then(data => res.send(data))
@@ -57,11 +64,15 @@ exports.findAll = (req, res) => {
     });
 };
 
+// Obtener una venta por ID
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
   Venta.findByPk(id, {
-    include: ["detalle_ventas"]
+    include: [{
+      association: "detalle_ventas",
+      include: ["producto"]
+    }]
   })
     .then(data => {
       if (data) {
@@ -76,6 +87,8 @@ exports.findOne = (req, res) => {
       });
     });
 };
+
+// Actualizar una venta
 exports.update = (req, res) => {
   const id = req.params.id;
 
@@ -84,7 +97,7 @@ exports.update = (req, res) => {
       if (num == 1) {
         res.send({ message: "Venta actualizada correctamente." });
       } else {
-        res.send({ message: `No se pudo actualizar la venta con id=${id}.` });
+        res.status(404).send({ message: `No se pudo actualizar la venta con id=${id}.` });
       }
     })
     .catch(err => {
@@ -93,6 +106,8 @@ exports.update = (req, res) => {
       });
     });
 };
+
+// Eliminar una venta
 exports.delete = async (req, res) => {
   const id = req.params.id;
 
@@ -106,7 +121,7 @@ exports.delete = async (req, res) => {
     if (num == 1) {
       res.send({ message: "Venta eliminada correctamente." });
     } else {
-      res.send({ message: `No se encontró la venta con id=${id}.` });
+      res.status(404).send({ message: `No se encontró la venta con id=${id}.` });
     }
   } catch (err) {
     res.status(500).send({

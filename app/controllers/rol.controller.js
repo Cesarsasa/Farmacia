@@ -4,17 +4,17 @@ const Op = db.Sequelize.Op;
 
 // Crear un nuevo rol
 exports.create = (req, res) => {
-  if (!req.body.nombre || !req.body.direccion) {
-    return res.status(400).send({ message: "Nombre y dirección son obligatorios." });
+  if (!req.body.nombre) {
+    return res.status(400).send({ message: "El nombre del rol es obligatorio." });
   }
 
   const rol = {
     nombre: req.body.nombre,
-    direccion: req.body.direccion
+    descripcion: req.body.descripcion
   };
 
   Rol.create(rol)
-    .then(data => res.send(data))
+    .then(data => res.status(201).send(data))
     .catch(err => {
       res.status(500).send({
         message: err.message || "Ocurrió un error al crear el rol."
@@ -64,7 +64,7 @@ exports.update = (req, res) => {
       if (num == 1) {
         res.send({ message: "Rol actualizado correctamente." });
       } else {
-        res.send({ message: `No se pudo actualizar el rol con id=${id}.` });
+        res.status(404).send({ message: `No se pudo actualizar el rol con id=${id}.` });
       }
     })
     .catch(err => {
@@ -83,7 +83,7 @@ exports.delete = (req, res) => {
       if (num == 1) {
         res.send({ message: "Rol eliminado correctamente." });
       } else {
-        res.send({ message: `No se encontró el rol con id=${id}.` });
+        res.status(404).send({ message: `No se encontró el rol con id=${id}.` });
       }
     })
     .catch(err => {

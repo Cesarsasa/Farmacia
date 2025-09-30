@@ -21,7 +21,7 @@ exports.create = (req, res) => {
   };
 
   Usuario.create(usuario)
-    .then(data => res.send(data))
+    .then(data => res.status(201).send(data))
     .catch(err => {
       res.status(500).send({
         message: err.message || "Ocurrió un error al crear el usuario."
@@ -48,7 +48,15 @@ exports.findOne = (req, res) => {
   const id = req.params.id;
 
   Usuario.findByPk(id)
-    .then(data => res.send(data))
+    .then(data => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({ 
+          message: `No se encontró el usuario con id=${id}.` 
+        });
+      }
+    })
     .catch(err => {
       res.status(500).send({
         message: "Error al recuperar el usuario con id=" + id
@@ -65,7 +73,9 @@ exports.update = (req, res) => {
       if (num == 1) {
         res.send({ message: "Usuario actualizado correctamente." });
       } else {
-        res.send({ message: `No se pudo actualizar el usuario con id=${id}.` });
+        res.status(404).send({ 
+          message: `No se pudo actualizar el usuario con id=${id}.` 
+        });
       }
     })
     .catch(err => {
@@ -84,7 +94,9 @@ exports.delete = (req, res) => {
       if (num == 1) {
         res.send({ message: "Usuario eliminado correctamente." });
       } else {
-        res.send({ message: `No se encontró el usuario con id=${id}.` });
+        res.status(404).send({ 
+          message: `No se encontró el usuario con id=${id}.` 
+        });
       }
     })
     .catch(err => {
@@ -107,6 +119,7 @@ exports.deleteAll = (req, res) => {
     });
 };
 
+// Hooks para encriptar contraseña
 Usuario.beforeCreate(async (usuario, options) => {
   const salt = await bcrypt.genSalt(10);
   usuario.contrasena = await bcrypt.hash(usuario.contrasena, salt);

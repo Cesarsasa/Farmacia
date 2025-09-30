@@ -71,6 +71,25 @@ exports.findOne = (req, res) => {
     });
 };
 
+// Actualizar una transacción
+exports.update = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const num = await Transaccion.update(req.body, { where: { id: id } });
+
+    if (num == 1) {
+      res.send({ message: "Transacción actualizada correctamente." });
+    } else {
+      res.status(404).send({ message: `No se pudo actualizar la transacción con id=${id}.` });
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: "Error al actualizar la transacción con id=" + id
+    });
+  }
+};
+
 // Eliminar una transacción
 exports.delete = async (req, res) => {
   const id = req.params.id;
@@ -81,7 +100,7 @@ exports.delete = async (req, res) => {
     if (num == 1) {
       res.send({ message: "Transacción eliminada correctamente." });
     } else {
-      res.send({ message: `No se encontró la transacción con id=${id}.` });
+      res.status(404).send({ message: `No se encontró la transacción con id=${id}.` });
     }
   } catch (err) {
     res.status(500).send({
