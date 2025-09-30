@@ -1,8 +1,8 @@
 module.exports = {
-  HOST: "localhost",
-  USER: "cesar",
-  PASSWORD: "12345",
-  DB: "farmacia",
+ HOST: "ep-odd-sunset-afe61qyu-pooler.c-2.us-west-2.aws.neon.tech",
+  USER: "neondb_owner",
+  PASSWORD: "npg_6Utp3cbqwXDn",
+  DB: "neondb",
   dialect: "postgres",
     port: 5532,
   pool: {
