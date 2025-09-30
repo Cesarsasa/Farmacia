@@ -19,17 +19,17 @@ module.exports = app => {
      *         nombre:
      *           type: string
      *           description: Nombre del producto
-     *           example: "Laptop Dell XPS 13"
+     *           example: "Aspirina"
      *         descripcion:
      *           type: string
      *           description: Descripción detallada del producto
-     *           example: "Laptop ultradelgada con procesador Intel i7 y 16GB RAM"
+     *           example: "Tabletas de aspirina para aliviar el dolor y reducir la fiebre"
      *         precio_unitario:
      *           type: number
      *           format: float
      *           description: Precio unitario del producto
      *           minimum: 0
-     *           example: 12500.99
+     *           example: 7.99
      *         id_proveedor:
      *           type: integer
      *           description: ID del proveedor del producto
@@ -50,14 +50,14 @@ module.exports = app => {
      *       properties:
      *         nombre:
      *           type: string
-     *           example: "Mouse Inalámbrico"
+     *           example: "Acetaminofén"
      *         descripcion:
      *           type: string
-     *           example: "Mouse ergonómico inalámbrico con sensor óptico"
+     *           example: "Medicamento para aliviar el dolor y reducir la fiebre"
      *         precio_unitario:
      *           type: number
      *           format: float
-     *           example: 450.50
+     *           example: 5.50
      *         id_proveedor:
      *           type: integer
      *           example: 2
@@ -104,8 +104,8 @@ module.exports = app => {
      *           schema:
      *             $ref: '#/components/schemas/ProductoCreate'
      *           example:
-     *             nombre: "Teclado Mecánico RGB"
-     *             descripcion: "Teclado mecánico con retroiluminación RGB y switches azules"
+     *             nombre: "Tylenol Extra Fuerte"
+     *             descripcion: "Medicamento para aliviar dolores fuertes"
      *             precio_unitario: 899.99
      *             id_proveedor: 1
      *     responses:
@@ -148,9 +148,9 @@ module.exports = app => {
      *                 $ref: '#/components/schemas/Producto'
      *             example:
      *               - id: 1
-     *                 nombre: "Monitor 24 pulgadas"
-     *                 descripcion: "Monitor LED Full HD 24 pulgadas"
-     *                 precio_unitario: 1500.00
+     *                 nombre: "Centrum"
+     *                 descripcion: "Multivitamico en Tabletas"
+     *                 precio_unitario: 500.00
      *                 id_proveedor: 2
      *                 createdAt: "2023-12-20T10:30:00.000Z"
      *                 updatedAt: "2023-12-20T10:30:00.000Z"
@@ -204,9 +204,9 @@ module.exports = app => {
      *           schema:
      *             $ref: '#/components/schemas/ProductoCreate'
      *           example:
-     *             nombre: "Monitor 24 pulgadas Updated"
-     *             descripcion: "Monitor LED Full HD 24 pulgadas con nueva descripción"
-     *             precio_unitario: 1400.00
+     *             nombre: "Hidroxon"
+     *             descripcion: "Electrolitos para rehidratar"
+     *             precio_unitario: 25.00
      *     responses:
      *       200:
      *         description: Producto actualizado exitosamente

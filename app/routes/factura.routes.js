@@ -67,7 +67,7 @@ module.exports = app => {
    *         nombre:
    *           type: string
    *           description: Nombre del producto
-   *           example: "Laptop Gamer"
+   *           example: "Paracetamol"
    *     FacturaCreateRequest:
    *       type: object
    *       required:
