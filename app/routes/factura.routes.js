@@ -116,7 +116,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/facturas/create:
+   * /facturas/create:
    *   post:
    *     summary: Crear una factura a partir de una venta
    *     tags: [Facturas]
@@ -162,7 +162,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/facturas:
+   * /facturas:
    *   get:
    *     summary: Obtener todas las facturas
    *     tags: [Facturas]
@@ -191,7 +191,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/facturas/{id}:
+   * /facturas/{id}:
    *   get:
    *     summary: Obtener una factura por ID
    *     tags: [Facturas]
@@ -220,7 +220,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/facturas/delete/{id}:
+   * /facturas/delete/{id}:
    *   delete:
    *     summary: Eliminar una factura por ID
    *     tags: [Facturas]
@@ -248,7 +248,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/facturas/pdf/{id}:
+   * /facturas/pdf/{id}:
    *   get:
    *     summary: Generar factura en PDF
    *     tags: [Facturas]

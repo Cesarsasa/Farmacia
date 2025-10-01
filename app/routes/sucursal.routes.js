@@ -80,7 +80,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/sucursal/create:
+     * /sucursal/create:
      *   post:
      *     summary: Crear una nueva sucursal
      *     tags: [Sucursales]
@@ -117,7 +117,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/sucursal:
+     * /sucursal:
      *   get:
      *     summary: Obtener todas las sucursales
      *     tags: [Sucursales]
@@ -153,7 +153,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/sucursal/{id}:
+     * /sucursal/{id}:
      *   get:
      *     summary: Obtener una sucursal por ID
      *     tags: [Sucursales]
@@ -182,7 +182,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/sucursal/update/{id}:
+     * /sucursal/update/{id}:
      *   put:
      *     summary: Actualizar una sucursal
      *     tags: [Sucursales]
@@ -221,7 +221,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/sucursal/delete/{id}:
+     * /sucursal/delete/{id}:
      *   delete:
      *     summary: Eliminar una sucursal por ID
      *     tags: [Sucursales]
@@ -250,7 +250,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/sucursal/delete:
+     * /sucursal/delete:
      *   delete:
      *     summary: Eliminar todas las sucursales
      *     tags: [Sucursales]

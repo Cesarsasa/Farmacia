@@ -141,7 +141,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/usuario/create:
+     * /usuario/create:
      *   post:
      *     summary: Crear un nuevo usuario
      *     tags: [Usuarios]
@@ -182,7 +182,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/usuario:
+     * /usuario:
      *   get:
      *     summary: Obtener todos los usuarios
      *     tags: [Usuarios]
@@ -215,7 +215,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/usuario/{id}:
+     * /usuario/{id}:
      *   get:
      *     summary: Obtener un usuario por ID
      *     tags: [Usuarios]
@@ -244,7 +244,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/usuario/update/{id}:
+     * /usuario/update/{id}:
      *   put:
      *     summary: Actualizar un usuario
      *     tags: [Usuarios]
@@ -283,7 +283,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/usuario/delete/{id}:
+     * /usuario/delete/{id}:
      *   delete:
      *     summary: Eliminar un usuario por ID
      *     tags: [Usuarios]
@@ -312,7 +312,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/usuario/delete:
+     * /usuario/delete:
      *   delete:
      *     summary: Eliminar todos los usuarios
      *     tags: [Usuarios]

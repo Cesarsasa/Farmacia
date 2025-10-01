@@ -71,7 +71,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/auth/login-cliente:
+   * /auth/login-cliente:
    *   post:
    *     summary: Iniciar sesión como cliente
    *     tags: [Autenticación]
@@ -145,7 +145,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/auth/login-empleado:
+   * /auth/login-empleado:
    *   post:
    *     summary: Iniciar sesión como empleado
    *     tags: [Autenticación]

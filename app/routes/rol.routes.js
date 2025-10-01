@@ -73,7 +73,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/rol/create:
+     * /rol/create:
      *   post:
      *     summary: Crear un nuevo rol
      *     tags: [Roles]
@@ -109,7 +109,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/rol:
+     * /rol:
      *   get:
      *     summary: Obtener todos los roles
      *     tags: [Roles]
@@ -143,7 +143,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/rol/{id}:
+     * /rol/{id}:
      *   get:
      *     summary: Obtener un rol por ID
      *     tags: [Roles]
@@ -172,7 +172,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/rol/update/{id}:
+     * /rol/update/{id}:
      *   put:
      *     summary: Actualizar un rol
      *     tags: [Roles]
@@ -210,7 +210,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/rol/delete/{id}:
+     * /rol/delete/{id}:
      *   delete:
      *     summary: Eliminar un rol por ID
      *     tags: [Roles]
@@ -239,7 +239,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/rol/delete:
+     * /rol/delete:
      *   delete:
      *     summary: Eliminar todos los roles
      *     tags: [Roles]

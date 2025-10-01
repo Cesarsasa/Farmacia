@@ -147,7 +147,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/ventas/create:
+   * /ventas/create:
    *   post:
    *     summary: Crear una nueva venta
    *     tags: [Ventas]
@@ -195,7 +195,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/ventas:
+   * /ventas:
    *   get:
    *     summary: Obtener todas las ventas
    *     tags: [Ventas]
@@ -240,7 +240,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/ventas/{id}:
+   * /ventas/{id}:
    *   get:
    *     summary: Obtener una venta por ID
    *     tags: [Ventas]
@@ -269,7 +269,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/ventas/update/{id}:
+   * /ventas/update/{id}:
    *   put:
    *     summary: Actualizar una venta
    *     tags: [Ventas]
@@ -312,7 +312,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/ventas/delete/{id}:
+   * /ventas/delete/{id}:
    *   delete:
    *     summary: Eliminar una venta por ID
    *     tags: [Ventas]

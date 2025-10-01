@@ -92,7 +92,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/producto/create:
+     * /producto/create:
      *   post:
      *     summary: Crear un nuevo producto
      *     tags: [Productos]
@@ -130,7 +130,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/producto:
+     * /producto:
      *   get:
      *     summary: Obtener todos los productos
      *     tags: [Productos]
@@ -161,7 +161,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/producto/{id}:
+     * /producto/{id}:
      *   get:
      *     summary: Obtener un producto por ID
      *     tags: [Productos]
@@ -190,7 +190,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/producto/update/{id}:
+     * /producto/update/{id}:
      *   put:
      *     summary: Actualizar un producto
      *     tags: [Productos]
@@ -229,7 +229,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/producto/delete/{id}:
+     * /producto/delete/{id}:
      *   delete:
      *     summary: Eliminar un producto por ID
      *     tags: [Productos]
@@ -258,7 +258,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/producto/delete:
+     * /producto/delete:
      *   delete:
      *     summary: Eliminar todos los productos
      *     tags: [Productos]

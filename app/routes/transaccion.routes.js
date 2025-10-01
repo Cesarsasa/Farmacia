@@ -99,7 +99,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/transacciones/create:
+   * /transacciones/create:
    *   post:
    *     summary: Crear una nueva transacción
    *     tags: [Transacciones]
@@ -157,7 +157,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/transacciones:
+   * /transacciones:
    *   get:
    *     summary: Obtener todas las transacciones
    *     tags: [Transacciones]
@@ -189,7 +189,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/transacciones/{id}:
+   * /transacciones/{id}:
    *   get:
    *     summary: Obtener una transacción por ID
    *     tags: [Transacciones]
@@ -218,7 +218,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/transacciones/update/{id}:
+   * /transacciones/update/{id}:
    *   put:
    *     summary: Actualizar una transacción
    *     tags: [Transacciones]
@@ -256,7 +256,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/transacciones/delete/{id}:
+   * /transacciones/delete/{id}:
    *   delete:
    *     summary: Eliminar una transacción por ID
    *     tags: [Transacciones]

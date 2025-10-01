@@ -85,7 +85,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/inventario/create:
+     * /inventario/create:
      *   post:
      *     summary: Crear un nuevo registro de inventario
      *     tags: [Inventario]
@@ -122,7 +122,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/inventario:
+     * /inventario:
      *   get:
      *     summary: Obtener todos los registros de inventario
      *     tags: [Inventario]
@@ -145,7 +145,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/inventario/{id}:
+     * /inventario/{id}:
      *   get:
      *     summary: Obtener un registro de inventario por ID
      *     tags: [Inventario]
@@ -172,7 +172,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/inventario/update/{id}:
+     * /inventario/update/{id}:
      *   put:
      *     summary: Actualizar un registro de inventario
      *     tags: [Inventario]
@@ -211,7 +211,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/inventario/delete/{id}:
+     * /inventario/delete/{id}:
      *   delete:
      *     summary: Eliminar un registro de inventario por ID
      *     tags: [Inventario]
@@ -240,7 +240,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/inventario/delete:
+     * /inventario/delete:
      *   delete:
      *     summary: Eliminar todos los registros de inventario
      *     tags: [Inventario]

@@ -89,7 +89,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/prov/create:
+     * /prov/create:
      *   post:
      *     summary: Crear un nuevo proveedor
      *     tags: [Proveedores]
@@ -127,7 +127,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/prov:
+     * /prov:
      *   get:
      *     summary: Obtener todos los proveedores
      *     tags: [Proveedores]
@@ -158,7 +158,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/prov/{id}:
+     * /prov/{id}:
      *   get:
      *     summary: Obtener un proveedor por ID
      *     tags: [Proveedores]
@@ -187,7 +187,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/prov/update/{id}:
+     * /prov/update/{id}:
      *   put:
      *     summary: Actualizar un proveedor
      *     tags: [Proveedores]
@@ -227,7 +227,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/prov/delete/{id}:
+     * /prov/delete/{id}:
      *   delete:
      *     summary: Eliminar un proveedor por ID
      *     tags: [Proveedores]
@@ -256,7 +256,7 @@ module.exports = app => {
 
     /**
      * @swagger
-     * /api/prov/delete:
+     * /prov/delete:
      *   delete:
      *     summary: Eliminar todos los proveedores
      *     tags: [Proveedores]

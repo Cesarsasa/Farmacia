@@ -105,7 +105,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/customer/create:
+   * /customer/create:
    *   post:
    *     summary: Crear un nuevo cliente
    *     tags: [Clientes]
@@ -150,7 +150,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/customer:
+   * /customer:
    *   get:
    *     summary: Obtener todos los clientes
    *     tags: [Clientes]
@@ -177,7 +177,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/customer/{id}:
+   * /customer/{id}:
    *   get:
    *     summary: Obtener un cliente por ID
    *     tags: [Clientes]
@@ -204,7 +204,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/customer/update/{id}:
+   * /customer/update/{id}:
    *   put:
    *     summary: Actualizar un cliente
    *     tags: [Clientes]
@@ -245,7 +245,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/customer/delete/{id}:
+   * /customer/delete/{id}:
    *   delete:
    *     summary: Eliminar un cliente por ID
    *     tags: [Clientes]
@@ -276,7 +276,7 @@ module.exports = app => {
 
   /**
    * @swagger
-   * /api/customer/delete:
+   * /customer/delete:
    *   delete:
    *     summary: Eliminar todos los clientes
    *     tags: [Clientes]
