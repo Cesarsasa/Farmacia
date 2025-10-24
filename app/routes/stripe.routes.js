@@ -1,9 +1,14 @@
-const express = require("express");
-const router = express.Router();
-const bodyParser = require("body-parser");
-const stripeController = require("../controllers/stripe.controller");
+module.exports = app => {
+  const stripe = require("../controllers/stripe.controller.js");
+  const router = require("express").Router();
 
-router.post("/crear-sesion", stripeController.crearSesionPago);
+  // 🎯 Ruta para crear sesión de pago
+  // POST /api/stripe/checkout
+  router.post("/checkout", stripe.crearSesionPago);
 
+  // 📡 Ruta para recibir eventos de Stripe (webhook)
+  // Esta ruta debe estar registrada en server.js con bodyParser.raw
+  // POST /api/stripe/webhook → definida directamente en server.js
 
-module.exports = router;
+  app.use("/api/stripe", router);
+};

@@ -286,5 +286,7 @@ module.exports = app => {
   router.get("/pdf/:id", factura.generarFacturaPDF);
  
 
+router.get("/ultima/:id", factura.obtenerUltimaVenta);
+
   app.use("/api/facturas", router);
 };

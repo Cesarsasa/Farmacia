@@ -202,6 +202,8 @@ module.exports = app => {
    */
   router.get("/:id",clientes.findOne);
 
+    router.get("/buscarnit/:nit",clientes.buscarPorNit);
+
   /**
    * @swagger
    * /customer/update/{id}:

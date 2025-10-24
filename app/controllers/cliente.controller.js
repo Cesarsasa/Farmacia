@@ -55,7 +55,22 @@ exports.findOne = (req, res) => {
             });
         });
 };
+// GET /clientes/buscar-por-nit?nit=12345678
+exports.buscarPorNit = async (req, res) => {
+  const { nit } = req.params; // ← aquí el cambio
 
+  try {
+    const cliente = await Cliente.findOne({ where: { nit } });
+
+    if (!cliente) {
+      return res.status(404).send({ message: "Cliente no encontrado." });
+    }
+
+    res.send(cliente);
+  } catch (err) {
+    res.status(500).send({ message: "Error al buscar cliente por NIT." });
+  }
+};
 // Update Client by ID
 exports.update = (req, res) => {
     const id = req.params.id;

@@ -185,3 +185,27 @@ exports.generarFacturaPDF = async (req, res) => {
     res.status(500).send({ message: "Error al generar la factura PDF." });
   }
 };
+
+exports.obtenerUltimaVenta = async (req, res) => {
+  const id_cliente = req.params.id;
+
+  if (!id_cliente) {
+    return res.status(400).json({ message: "Falta el id_cliente" });
+  }
+
+  try {
+    const venta = await Venta.findOne({
+      where: { id_cliente },
+      order: [["createdAt", "DESC"]],
+    });
+
+    if (!venta) {
+      return res.status(404).json({ message: "No se encontró ninguna venta" });
+    }
+
+    res.json(venta);
+  } catch (err) {
+    console.error("❌ Error al obtener venta:", err.message);
+    res.status(500).json({ message: "Error interno del servidor" });
+  }
+};
