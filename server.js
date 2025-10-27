@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 8082;
 
 // CORS
 const corsOptions = {
-  origin: "http://localhost:5173"
+  origin: process.env.HOST_FRONTEND || "http://localhost:5173"
 };
 app.use(cors(corsOptions));
 
