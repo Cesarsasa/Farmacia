@@ -25,13 +25,14 @@ module.exports = (sequelize, Sequelize) => {
         },
           id_usuario: {
            type: Sequelize.INTEGER,
-            allowNull: false,
+            allowNull: true,
              references: {
             model: 'usuarios', // nombre de la tabla a la que referencia
              key: 'id'  // nombre del campo clave primaria en Cliente
                      },
-                onUpdate: 'CASCADE',
-             onDelete: 'SET NULL'
+                onDelete: 'SET NULL',
+                onUpdate: 'CASCADE'
+
         },  
           id_cliente: {
            type: Sequelize.INTEGER,
@@ -45,7 +46,7 @@ module.exports = (sequelize, Sequelize) => {
         },
           id_sucursal: {
            type: Sequelize.INTEGER,
-            allowNull: false,
+            allowNull: true,
              references: {
             model: 'sucursals', // nombre de la tabla a la que referencia
              key: 'id'  // nombre del campo clave primaria en Cliente

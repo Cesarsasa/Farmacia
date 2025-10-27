@@ -17,6 +17,7 @@ exports.create = (req, res) => {
         descripcion: req.body.descripcion,
         precio_unitario: req.body.precio_unitario,
         imagen_url: req.body.imagen_url,
+        categoria: req.body.categoria, 
         id_proveedor: req.body.id_proveedor
     };
 console.log("Datos recibidos:", req.body);
@@ -75,23 +76,24 @@ exports.findOne = (req, res) => {
 
 // Update Product by ID
 exports.update = (req, res) => {
-    const id = req.params.id;
+  const id = req.params.id;
 
-    Producto.update(req.body, { where: { id: id } })
-        .then(num => {
-            if (num == 1) {
-                res.send({ message: "Producto actualizado correctamente." });
-            } else {
-                res.status(404).send({ 
-                    message: `No se pudo actualizar el producto con id=${id}.` 
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error al actualizar el producto con id=" + id
-            });
+  Producto.update(req.body, { where: { id: id } })
+    .then(([num]) => {
+      if (num === 1) {
+        res.send({ message: "Producto actualizado correctamente." });
+      } else {
+        res.status(404).send({
+          message: `No se pudo actualizar el producto con id=${id}.`
         });
+      }
+    })
+    .catch(err => {
+      console.error("Error al actualizar producto:", err); // 👈 importante para ver el error real
+      res.status(500).send({
+        message: "Error al actualizar el producto con id=" + id
+      });
+    });
 };
 
 // Delete Product by ID

@@ -31,7 +31,8 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING(20)
         },
         correo: {
-            type: Sequelize.STRING(100)
+            type: Sequelize.STRING(100),
+            unique: true
         }
 
     });

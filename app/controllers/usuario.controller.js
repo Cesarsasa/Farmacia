@@ -22,17 +22,23 @@ exports.create = (req, res) => {
     puesto: req.body.puesto,
     telefono: req.body.telefono,
     id_sucursal: req.body.id_sucursal,
-    id_rol: req.body.id_rol
+    id_rol: req.body.id_rol,
+      salario: req.body.salario
   };
 
   Usuario.create(usuario)
     .then(data => res.status(201).send(data))
     .catch(err => {
-      res.status(500).send({
-        message: err.message || "Ocurrió un error al crear el usuario."
-      });
+      if (err.name === 'SequelizeUniqueConstraintError') {
+        res.status(400).send({ message: "El correo ya está registrado. Usa uno diferente." });
+      } else {
+        res.status(500).send({
+          message: err.message || "Ocurrió un error al crear el usuario."
+        });
+      }
     });
 };
+
 
 // Obtener todos los usuarios (con filtro opcional por nombre)
 /*exports.findAll = (req, res) => {
@@ -89,24 +95,30 @@ exports.findOne = (req, res) => {
 };
 
 // Actualizar un usuario por ID
-exports.update = (req, res) => {
+exports.update = async (req, res) => {
   const id = req.params.id;
 
-  Usuario.update(req.body, { where: { id: id } })
-    .then(num => {
-      if (num == 1) {
-        res.send({ message: "Usuario actualizado correctamente." });
-      } else {
-        res.status(404).send({ 
-          message: `No se pudo actualizar el usuario con id=${id}.` 
-        });
+  try {
+    const usuario = await Usuario.findByPk(id);
+    if (!usuario) {
+      return res.status(404).send({ message: `No se encontró el usuario con id=${id}.` });
+    }
+
+    // Actualiza los campos manualmente
+    Object.keys(req.body).forEach(key => {
+      if (req.body[key] !== undefined) {
+        usuario[key] = req.body[key];
       }
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Error al actualizar el usuario con id=" + id
-      });
     });
+
+    await usuario.save(); // Esto sí dispara el hook beforeUpdate
+
+    res.send({ message: "Usuario actualizado correctamente." });
+  } catch (err) {
+    res.status(500).send({
+      message: "Error al actualizar el usuario con id=" + id
+    });
+  }
 };
 
 // Eliminar un usuario por ID

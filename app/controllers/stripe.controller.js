@@ -7,6 +7,7 @@ const DetalleVenta = db.detalle_ventas;
 const Inventario = db.inventarios;
 
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+const hostfrontend = process.env.HOST_FRONTEND ;
 const tipoCambioGTQ_USD = 7.9;
 
 /**
@@ -39,8 +40,8 @@ exports.crearSesionPago = async (req, res) => {
       mode: "payment",
       customer_email: cliente_email,
       client_reference_id: id_cliente,
-      success_url: "http://localhost:5173/factura/opc?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: "http://localhost:5173/cancel"
+      success_url: `${process.env.HOST_FRONTEND}/factura/opc?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url:  `${process.env.HOST_FRONTEND}/cancel`
     });
 
     res.send({ url: session.url });

@@ -1,4 +1,7 @@
 const db = require("../models");
+//const { Resend } = require("resend");
+
+///const resend = new Resend(process.env.RESEND_API_KEY);
 const Cliente = db.clientes;
 const Usuario = db.usuarios; // 👈 asegúrate de tener este modelo definido
 const bcrypt = require("bcrypt");
@@ -90,7 +93,7 @@ exports.solicitarRecuperacion = async (req, res) => {
     if (!usuario) return res.status(404).send({ message: 'Correo no registrado' });
 
     const token = jwt.sign({ id: usuario.id }, SECRET, { expiresIn: '15m' });
-    const enlace = `http://localhost:5173/reset-password?token=${token}`;
+    const enlace = `${process.env.HOST_FRONTEND}/reset-password?token=${token}`;
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -168,7 +171,7 @@ exports.solicitarRecuperacioncliente = async (req, res) => {
     if (!cliente) return res.status(404).send({ message: 'Correo no registrado' });
 
     const token = jwt.sign({ id: cliente.id }, SECRET, { expiresIn: '15m' });
-    const enlace = `http://localhost:5173/reset-password-cli?token=${token}`;
+    const enlace = `${process.env.HOST_FRONTEND}/reset-password-cli?token=${token}`;
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',

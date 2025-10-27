@@ -14,7 +14,8 @@ module.exports = (sequelize, Sequelize) => {
         },
         correo: {
             type: Sequelize.STRING(100),
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         contrasena: {
             type: Sequelize.STRING(100),
@@ -47,7 +48,12 @@ module.exports = (sequelize, Sequelize) => {
                      },
                 onUpdate: 'CASCADE',
              onDelete: 'SET NULL'
+        },
+        salario: {
+        type: Sequelize.DECIMAL(10, 2), // o FLOAT si prefieres
+        allowNull: false // o false si quieres que sea obligatorio
         }
+
 
     });
     return Usuario;
