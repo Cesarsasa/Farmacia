@@ -243,7 +243,7 @@ module.exports = app => {
    *       500:
    *         description: Error interno del servidor
    */
-  router.put("/update/:id", authJwt.verifyEmpleado,clientes.update);
+  router.put("/update/:id", clientes.update);
 
   /**
    * @swagger
