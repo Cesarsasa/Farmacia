@@ -1,3 +1,4 @@
+
 module.exports = app => {
   const factura = require("../controllers/factura.controller.js");
   const router = require("express").Router();
@@ -287,6 +288,9 @@ module.exports = app => {
  
 
 router.get("/ultima/:id", factura.obtenerUltimaVenta);
+
+router.get("/correo/:id", factura.enviarFacturaPorCorreo);
+
 
   app.use("/api/facturas", router);
 };

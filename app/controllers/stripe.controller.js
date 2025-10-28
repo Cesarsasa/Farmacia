@@ -40,7 +40,7 @@ exports.crearSesionPago = async (req, res) => {
       mode: "payment",
       customer_email: cliente_email,
       client_reference_id: id_cliente,
-      success_url: `${process.env.HOST_FRONTEND}/factura/opc?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${process.env.HOST_FRONTEND}/factura/opc`,
       cancel_url:  `${process.env.HOST_FRONTEND}/cancel`
     });
 
@@ -84,8 +84,8 @@ exports.webhookStripe = async (req, res) => {
 
       const venta = await Venta.create({
   id_cliente,
-  id_usuario: 10,
-  id_sucursal: 5,  // ✅ Usuario fijo para ventas web
+  id_usuario: 23,
+  id_sucursal: 9,  // ✅ Usuario fijo para ventas web
   total
 });
 

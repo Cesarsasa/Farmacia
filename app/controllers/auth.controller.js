@@ -1,7 +1,7 @@
 const db = require("../models");
-//const { Resend } = require("resend");
+const { Resend } = require("resend");
 
-///const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY);
 const Cliente = db.clientes;
 const Usuario = db.usuarios; // 👈 asegúrate de tener este modelo definido
 const bcrypt = require("bcrypt");
@@ -102,17 +102,30 @@ exports.solicitarRecuperacion = async (req, res) => {
         pass: process.env.EMAIL_PASS,
       },
     });
+        await resend.emails.send({
+          from: 'FarmaPlus <no-reply@farmaciadev.online>',
+          to: correo,
+          subject: 'Recuperación de contraseña',
+           html: `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
+      <h2 style="color: #2c3e50;">Recuperación de contraseña</h2>
+      <p>Hola <strong>${usuario.nombre}</strong>,</p>
+      <p>Recibimos una solicitud para restablecer tu contraseña. Haz clic en el botón de abajo para continuar. Este enlace expirará en 15 minutos:</p>
 
-    await transporter.sendMail({
-      from: 'Farmacia <no-reply@farmacia.com>',
-      to: correo,
-      subject: 'Recuperación de contraseña',
-      html: `
-        <p>Hola ${usuario.nombre},</p>
-        <p>Haz clic en el siguiente enlace para restablecer tu contraseña. Este enlace expirará en 15 minutos:</p>
-        <a href="${enlace}">${enlace}</a>
-      `,
-    });
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="${enlace}" style="background-color: #27ae60; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+          Restablecer contraseña
+        </a>
+      </div>
+
+      <p>Si no solicitaste este cambio, puedes ignorar este mensaje.</p>
+      <hr style="margin: 30px 0; border: none; border-top: 1px solid #ccc;" />
+      <p style="font-size: 12px; color: #888;">Este correo fue enviado por Farmaciadev.online. No respondas directamente a este mensaje.</p>
+    </div>
+  `
+,
+        });
+ 
 
     res.send({ message: 'Correo enviado con instrucciones para restablecer la contraseña.' });
   } catch (err) {
@@ -181,16 +194,29 @@ exports.solicitarRecuperacioncliente = async (req, res) => {
       },
     });
 
-    await transporter.sendMail({
-      from: 'Farmacia <no-reply@farmacia.com>',
-      to: correo,
-      subject: 'Recuperación de contraseña',
-      html: `
-        <p>Hola ${cliente.nombre},</p>
-        <p>Haz clic en el siguiente enlace para restablecer tu contraseña. Este enlace expirará en 15 minutos:</p>
-        <a href="${enlace}">${enlace}</a>
-      `,
-    });
+  await resend.emails.send({
+          from: 'FarmaPlus <no-reply@farmaciadev.online>',
+          to: correo,
+          subject: 'Recuperación de contraseña',
+           html: `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
+      <h2 style="color: #2c3e50;">Recuperación de contraseña</h2>
+      <p>Hola <strong>${usuario.nombre}</strong>,</p>
+      <p>Recibimos una solicitud para restablecer tu contraseña. Haz clic en el botón de abajo para continuar. Este enlace expirará en 15 minutos:</p>
+
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="${enlace}" style="background-color: #27ae60; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+          Restablecer contraseña
+        </a>
+      </div>
+
+      <p>Si no solicitaste este cambio, puedes ignorar este mensaje.</p>
+      <hr style="margin: 30px 0; border: none; border-top: 1px solid #ccc;" />
+      <p style="font-size: 12px; color: #888;">Este correo fue enviado por Farmaciadev.online. No respondas directamente a este mensaje.</p>
+    </div>
+  `
+,
+        });
 
     res.send({ message: 'Correo enviado con instrucciones para restablecer la contraseña.' });
   } catch (err) {
