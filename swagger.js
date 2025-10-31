@@ -1,6 +1,6 @@
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
-
+const hostbackend = process.env.HOST_FRONTEND ;
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -11,7 +11,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:8082/api", // cambia el puerto si usas otro
+        url:  `${process.env.HOST_BACKEND}/api`, // cambia el puerto si usas otro
       },
     ],
   },
