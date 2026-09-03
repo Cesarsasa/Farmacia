@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --runInBand"
   },
   "keywords": [
     "nodejs",
@@ -21,7 +21,7 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "get-stream": "^9.0.1",
+    "get-stream": "^6.0.1",
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^7.0.9",
     "pdfkit": "^0.17.2",
@@ -32,5 +32,10 @@
     "stripe": "^19.1.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "jest": "^30.4.2",
+    "supertest": "^7.2.2"
   }
 }

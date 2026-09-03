@@ -381,9 +381,3 @@ exports.enviarFacturaPorCorreo = async (req, res) => {
   }
 };
 
-// ✅ Línea azul separadora
-function drawBlueLine(doc) {
-  const y = doc.y + 5;
-  doc.moveTo(50, y).lineTo(550, y).strokeColor("#0074D9").lineWidth(1).stroke();
-  doc.moveDown();
-}
