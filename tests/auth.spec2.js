@@ -3,7 +3,7 @@ const app = require("../app");
 const db = require("../app/models"); // ← ajusta la ruta según donde esté la carpeta models
 
 beforeAll(async () => {
-  await db.sequelize.sync(); // ← espera que termine el sync ANTES de los tests
+inti  await db.sequelize.sync(); // ← espera que termine el sync ANTES de los tests
 }, 30000); // 30 segundos de timeout para el sync
 
 describe("Módulo de Autenticación - Login Empleado", () => {
