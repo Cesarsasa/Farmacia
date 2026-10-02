@@ -11,8 +11,8 @@ const { test, expect } = require("@playwright/test");
  * llamando a un endpoint de registro de clientes, si tu API lo expone).
  */
 
-const CLIENTE_CORREO = "cliente@ejemplo.com";
-const CLIENTE_CONTRASENA = "password123";
+const CLIENTE_CORREO = "prueba@gmail.com";
+const CLIENTE_CONTRASENA = "123456";
 
 test.describe("Módulo de Autenticación - Login Cliente", () => {
 
