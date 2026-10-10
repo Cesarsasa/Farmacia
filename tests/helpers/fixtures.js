@@ -60,7 +60,6 @@ async function crearSucursal(request) {
   return body.id;
 }
 
-/** Devuelve { id } del registro de inventario (la API lo envuelve en `data`). */
 async function crearInventario(request, { id_producto, id_sucursal, cantidad }) {
   const body = await crearYValidar(
     request,
@@ -71,7 +70,7 @@ async function crearInventario(request, { id_producto, id_sucursal, cantidad }) 
   return body.data.id;
 }
 
-async function crearCliente(request) {
+async function crearCliente(request, overrides = {}) {
   const s = sufijo();
   const body = await crearYValidar(request, "api/customer/create", {
     nombre: "QA",
@@ -81,39 +80,22 @@ async function crearCliente(request) {
     direccion: "Ciudad",
     telefono: "0000-0000",
     correo: `qa-cli-${s}@ejemplo.com`,
+    ...overrides,
   });
-  return { id: body.id, correo: body.correo };
+  return { id: body.id, correo: body.correo, nit: body.nit };
 }
 
-/**
- * Crea un escenario completo listo para comprar:
- * proveedor + producto + sucursal + inventario (con `stock`) + cliente.
- */
 async function crearEscenario(request, { stock = 10, precio = 25 } = {}) {
   const id_proveedor = await crearProveedor(request);
   const id_producto = await crearProducto(request, id_proveedor, precio);
   const id_sucursal = await crearSucursal(request);
-  const id_inventario = await crearInventario(request, {
-    id_producto,
-    id_sucursal,
-    cantidad: stock,
-  });
+  const id_inventario = await crearInventario(request, { id_producto, id_sucursal, cantidad: stock });
   const cliente = await crearCliente(request);
-  return {
-    id_proveedor,
-    id_producto,
-    id_sucursal,
-    id_inventario,
-    id_cliente: cliente.id,
-    correo: cliente.correo,
-    precio,
-  };
+  return { id_proveedor, id_producto, id_sucursal, id_inventario, id_cliente: cliente.id, correo: cliente.correo, precio };
 }
 
 async function agregarAlCarrito(request, { id_cliente, id_producto, cantidad }) {
-  const res = await request.post("api/carrito/agregar", {
-    data: { id_cliente, id_producto, cantidad },
-  });
+  const res = await request.post("api/carrito/agregar", { data: { id_cliente, id_producto, cantidad } });
   expect(res.status(), `agregar al carrito falló: ${await res.text()}`).toBe(201);
   return res.json();
 }
@@ -130,12 +112,48 @@ async function stockActual(request, id_inventario) {
   return (await res.json()).cantidad;
 }
 
-/** Ventas de un cliente (filtra en memoria: la API no tiene filtro por cliente). */
 async function ventasDeCliente(request, id_cliente) {
   const res = await request.get("api/ventas");
   expect(res.status()).toBe(200);
   const ventas = await res.json();
   return ventas.filter((v) => v.id_cliente === id_cliente);
+}
+
+async function crearVenta(request, { id_cliente, id_usuario = null, id_sucursal, detalle_ventas }) {
+  const res = await request.post("api/ventas/create", {
+    data: { id_cliente, id_usuario, id_sucursal, detalle_ventas },
+  });
+  expect(res.status(), `crear venta falló (${res.status()}): ${await res.text()}`).toBe(201);
+  return (await res.json()).venta;
+}
+
+async function crearVentaCompleta(request, { cantidad = 2, precio = 25 } = {}) {
+  const id_proveedor = await crearProveedor(request);
+  const id_producto = await crearProducto(request, id_proveedor, precio);
+  const id_sucursal = await crearSucursal(request);
+  await crearInventario(request, { id_producto, id_sucursal, cantidad: cantidad + 5 });
+  const cliente = await crearCliente(request);
+
+  const venta = await crearVenta(request, {
+    id_cliente: cliente.id,
+    id_sucursal,
+    detalle_ventas: [{ id_producto, cantidad, precio_unitario: precio }],
+  });
+
+  return {
+    id_venta: venta.id,
+    id_cliente: cliente.id,
+    correo: cliente.correo,
+    id_producto,
+    id_sucursal,
+    total: cantidad * precio,
+  };
+}
+
+async function crearFactura(request, id_venta) {
+  const res = await request.post("api/facturas/create", { data: { id_venta } });
+  expect(res.status(), `crear factura falló: ${await res.text()}`).toBe(201);
+  return (await res.json()).factura;
 }
 
 module.exports = {
@@ -149,4 +167,7 @@ module.exports = {
   verCarrito,
   stockActual,
   ventasDeCliente,
+  crearVenta,
+  crearVentaCompleta,
+  crearFactura,
 };
